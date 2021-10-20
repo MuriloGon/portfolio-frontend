@@ -6,8 +6,9 @@ type props = {
 };
 
 const TechsScroll = ({ scrollRef, children }: props) => (
-  <div ref={scrollRef} className="w-max flex">
+  <div ref={scrollRef} className="w-max flex anim">
     {children}
+    {/*  */}
   </div>
 )
 

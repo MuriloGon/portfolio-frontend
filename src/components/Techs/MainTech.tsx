@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import TechsScroll from "./TechsScroll";
-import { tech } from './techsData';
 import TechItem from "./TechItem";
-import './st.css'
+import { setTec } from ".";
+import './techStyles.css';
 
 const styles = {
   mainWrapper: 'overflow-hidden',
@@ -12,10 +12,11 @@ const styles = {
 type props = {
   direction?: 'right' | 'left',
   velocity?: number,
-  data: tech[]
+  data: setTec[],
+  toggleItem: (id: number) => void
 }
 
-function Techs({ data, direction = 'left', velocity = 500 }: props) {
+function Techs({ data, direction = 'left', velocity = 500, toggleItem }: props) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollState, setScrollState] = useState(true);
   const [scrollWidth, setScrollWidth] = useState(0);
@@ -65,8 +66,8 @@ function Techs({ data, direction = 'left', velocity = 500 }: props) {
       >
         {componentsCount.map((_, index) => (
           <TechsScroll key={index} scrollRef={scrollRef}>
-            {data.map(({ img, name }, i) => (
-              <TechItem img={img} name={name} />
+            {data.map((tech) => (
+              <TechItem toggleItem={toggleItem} tech={tech} />
             ))}
           </TechsScroll>
         )
